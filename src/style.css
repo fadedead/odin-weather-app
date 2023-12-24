@@ -1,8 +1,26 @@
 * {
 	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--header-bg: gray;
 }
 
 #content {
 	height: 100vh;
 	width: 100vw;
+}
+
+.header {
+	height: 5vh;
+	width: 100vw;
+
+	padding: 1rem;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: var(--header-bg);
 }

@@ -16,6 +16,7 @@
     "webpack.config.js": "^0.0.0"
   },
   "dependencies": {
+    "eslint": "^8.56.0",
     "eslint_d": "^13.1.1"
   }
 }

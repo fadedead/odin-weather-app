@@ -1,3 +1,15 @@
+import { getHeader } from "./header";
 import "./style.css";
+import { callAPI } from "./weatherApp";
 
-console.log("Hello Fadedead");
+callAPI().catch("Error in calling API");
+
+function createWeatherApp() {
+  const content = document.getElementById("content");
+
+  const header = getHeader();
+
+  content.appendChild(header);
+}
+
+createWeatherApp();
