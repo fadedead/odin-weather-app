@@ -1,4 +1,6 @@
+import { getCredits } from "./credits";
 import { getHeader } from "./header";
+import { getPage } from "./page";
 import "./style.css";
 import { callAPI } from "./weatherApp";
 
@@ -9,7 +11,13 @@ function createWeatherApp() {
 
   const header = getHeader();
 
+  const credits = getCredits();
+
+  const page = getPage();
+
+  content.appendChild(credits);
   content.appendChild(header);
+  content.appendChild(page);
 }
 
 createWeatherApp();
