@@ -8,6 +8,10 @@
 	--header-bg: gray;
 }
 
+a {
+	color: inherit;
+}
+
 #content {
 	height: 100vh;
 	width: 100vw;
@@ -32,11 +36,87 @@
 	background-color: var(--header-bg);
 }
 
+.search-input {
+	border-radius: 1rem;
+}
+
 .page {
 	height: 95vh;
 	width: 100vw;
 
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
 	background-image: url(./components/background.jpg);
 	background-size: cover;
 	background-position: center;
+}
+
+.day-forecast {
+	display: flex;
+}
+
+.forecase-slider {
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.forecast-container {
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+}
+
+.basic-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.slider {
+	height: 50vh;
+	width: 50vw;
+
+	display: flex;
+
+	border: 1px solid limegreen;
+}
+
+.slide-control {
+	width: 5vw;
+
+	cursor: pointer;
+
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hide-div {
+	display: none;
+}
+
+.show-div {
+	display: block;
+	object-fit: cover;
+
+	height: 100%;
+	width: 100%;
+}
+
+.indicator-active {
+	background: grey;
+}
+
+.credits {
+	color: white;
 }

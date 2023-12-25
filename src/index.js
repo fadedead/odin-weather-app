@@ -4,8 +4,6 @@ import { getPage } from "./page";
 import "./style.css";
 import { callAPI } from "./weatherApp";
 
-callAPI().catch("Error in calling API");
-
 function createWeatherApp() {
   const content = document.getElementById("content");
 
@@ -13,11 +11,18 @@ function createWeatherApp() {
 
   const credits = getCredits();
 
-  const page = getPage();
+  callAPI()
+    .catch((e) => {
+      console.log(`Error fetching the API: ${e}`);
+    })
+    .then((jsonResponse) => {
+      const page = getPage(jsonResponse.forecast.forecastday);
+
+      content.appendChild(page);
+    });
 
   content.appendChild(credits);
   content.appendChild(header);
-  content.appendChild(page);
 }
 
 createWeatherApp();
