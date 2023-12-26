@@ -40,44 +40,46 @@ function getForecastTables(
   sliderLeft,
   sliderRight,
 ) {
-  const images = [];
-  let imageIndex = 0;
+  const infoDivArr = [];
+  let infoDivIndex = 0;
 
   forecastArr.forEach((value, key) => {
-    const currInfo = document.createElement("div");
-    currInfo.classList.add("day-forecast");
-
     const basicInfo = getBasicInfo(value);
     basicInfo.classList = "hide-div";
     if (key == 1) {
       basicInfo.classList = "show-div";
     }
-
     forecastContainer.appendChild(basicInfo);
 
-    images.push(basicInfo);
+    infoDivArr.push(basicInfo);
   });
 
   sliderLeft.addEventListener("click", () => {
-    if (imageIndex > 0) {
-      images[imageIndex].classList = "hide-div";
-      images[imageIndex - 1].classList = "show-div";
+    if (infoDivIndex > 0) {
+      infoDivArr[infoDivIndex].classList = "hide-div";
+      infoDivArr[infoDivIndex - 1].classList = "show-div";
 
-      imageIndex -= 1;
+      infoDivIndex -= 1;
     }
   });
-  console.log(sliderRight);
   sliderRight.addEventListener("click", () => {
-    if (imageIndex < images.length - 1) {
-      images[imageIndex].classList = "hide-div";
-      images[imageIndex + 1].classList = "show-div";
-      imageIndex += 1;
+    if (infoDivIndex < infoDivArr.length - 1) {
+      infoDivArr[infoDivIndex].classList = "hide-div";
+      infoDivArr[infoDivIndex + 1].classList = "show-div";
+      infoDivIndex += 1;
     }
   });
 }
 
 function getBasicInfo(data) {
   const informationDiv = document.createElement("div");
+
+  const currDateContainer = document.createElement("div");
+  currDateContainer.classList.add("curr-date");
+  const currDate = document.createElement("p");
+  currDate.innerText = data.date.split("-").reverse().join("-");
+  currDateContainer.appendChild(currDate);
+  informationDiv.appendChild(currDateContainer);
 
   const date = document.createElement("p");
   date.innerText = data.date;
@@ -94,26 +96,55 @@ function getBasicInfo(data) {
   dayInfo.appendChild(forecastText);
   basicInfo.appendChild(dayInfo);
 
+  const tempInfo = document.createElement("div");
+  const temp = document.createElement("p");
+  temp.innerText = `temperature: ${data.day.avgtemp_c}\xB0C`;
+  tempInfo.appendChild(temp);
+  const humidity = document.createElement("p");
+  humidity.innerText = `humidity: ${data.day.avghumidity}%`;
+  tempInfo.appendChild(humidity);
+  basicInfo.appendChild(tempInfo);
+
   const sunRiseSetInfo = document.createElement("div");
   const sunRise = document.createElement("p");
-  sunRise.innerText = data.astro.sunrise;
+  sunRise.innerText = `sunrise: ${data.astro.sunrise}`;
   sunRiseSetInfo.appendChild(sunRise);
   const sunSet = document.createElement("p");
-  sunSet.innerText = data.astro.sunset;
+  sunSet.innerText = `sunset: ${data.astro.sunset}`;
   sunRiseSetInfo.appendChild(sunSet);
   basicInfo.appendChild(sunRiseSetInfo);
 
   const moonRiseSetInfo = document.createElement("div");
   const moonRise = document.createElement("p");
-  moonRise.innerText = data.astro.moonrise;
+  moonRise.innerText = `moonrise: ${data.astro.moonrise}`;
   moonRiseSetInfo.appendChild(moonRise);
   const moonSet = document.createElement("p");
-  moonSet.innerText = data.astro.moonset;
+  moonSet.innerText = `moonset: ${data.astro.moonset}`;
   moonRiseSetInfo.appendChild(moonSet);
   basicInfo.appendChild(moonRiseSetInfo);
 
   informationDiv.appendChild(basicInfo);
+
+  const hourlyInfo = getHourlyInfo(data);
+  informationDiv.appendChild(hourlyInfo);
+
   return informationDiv;
 }
 
+function getHourlyInfo(data) {
+  const hourly = document.createElement("div");
+  hourly.classList.add("hourly-info");
+  for (let day of data.hour) {
+    const div = document.createElement("div");
+    div.classList.add("each-hour");
+    const hour = document.createElement("p");
+    hour.innerText = day.time.split(" ")[1];
+    div.appendChild(hour);
+    const temp = document.createElement("p");
+    temp.innerText = `${Math.round(day.temp_c)}\xB0C`;
+    div.appendChild(temp);
+    hourly.appendChild(div);
+  }
+  return hourly;
+}
 export { getPage };
