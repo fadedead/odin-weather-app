@@ -1,4 +1,4 @@
-const baseURL = "http://api.weatherapi.com/v1";
+const baseURL = "https://api.weatherapi.com/v1";
 const forecastEndPoint = "/forecast.json";
 const API_KEY = "e398109b80054ea6904155405232312";
 
