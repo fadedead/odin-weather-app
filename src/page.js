@@ -1,14 +1,14 @@
-function getPage(forecastArr) {
+function getPage(forecastArr, city) {
   const page = document.createElement("div");
-  page.classList.add("page");
+  page.id = "page";
 
-  const forecast = getSlider(forecastArr);
+  const forecast = getSlider(forecastArr, city);
 
   page.appendChild(forecast);
   return page;
 }
 
-function getSlider(forecastArr) {
+function getSlider(forecastArr, city) {
   const container = document.createElement("div");
   container.classList.add("forecast-slider");
 
@@ -30,12 +30,19 @@ function getSlider(forecastArr) {
   slider.appendChild(sliderRight);
   container.appendChild(slider);
 
-  getForecastTables(forecastArr, forecastContainer, sliderLeft, sliderRight);
+  getForecastTables(
+    forecastArr,
+    city,
+    forecastContainer,
+    sliderLeft,
+    sliderRight,
+  );
   return container;
 }
 
 function getForecastTables(
   forecastArr,
+  city,
   forecastContainer,
   sliderLeft,
   sliderRight,
@@ -44,7 +51,7 @@ function getForecastTables(
   let infoDivIndex = 0;
 
   forecastArr.forEach((value, key) => {
-    const basicInfo = getBasicInfo(value);
+    const basicInfo = getBasicInfo(value, city);
     basicInfo.classList = "hide-div";
     if (key == 1) {
       basicInfo.classList = "show-div";
@@ -71,13 +78,13 @@ function getForecastTables(
   });
 }
 
-function getBasicInfo(data) {
+function getBasicInfo(data, city) {
   const informationDiv = document.createElement("div");
 
   const currDateContainer = document.createElement("div");
   currDateContainer.classList.add("curr-date");
   const currDate = document.createElement("p");
-  currDate.innerText = data.date.split("-").reverse().join("-");
+  currDate.innerText = `${city} : ${data.date.split("-").reverse().join("-")}`;
   currDateContainer.appendChild(currDate);
   informationDiv.appendChild(currDateContainer);
 

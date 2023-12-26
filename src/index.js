@@ -16,7 +16,7 @@ function createWeatherApp() {
       console.log(`Error fetching the API: ${e}`);
     })
     .then((jsonResponse) => {
-      const page = getPage(jsonResponse.forecast.forecastday);
+      const page = getPage(jsonResponse.forecast.forecastday, "tokyo");
 
       content.appendChild(page);
     });

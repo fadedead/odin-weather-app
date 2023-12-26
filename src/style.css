@@ -1,11 +1,11 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-size: 1rem;
+	font-size: 1.1rem;
 }
 
 :root {
-	--header-bg: gray;
+	--header-bg: #d8d7d7;
 }
 
 a {
@@ -37,10 +37,10 @@ a {
 }
 
 .search-input {
-	border-radius: 1rem;
+	border-radius: 0.6rem;
 }
 
-.page {
+#page {
 	height: 95vh;
 	width: 100vw;
 
@@ -79,6 +79,8 @@ a {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+
+	text-align: center;
 }
 
 .curr-date {
@@ -92,7 +94,6 @@ a {
 
 	display: flex;
 
-	border: 1px solid limegreen;
 	backdrop-filter: blur(10px);
 }
 
