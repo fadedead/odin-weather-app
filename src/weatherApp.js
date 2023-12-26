@@ -5,6 +5,7 @@ const API_KEY = "e398109b80054ea6904155405232312";
 async function callAPI() {
   const res = await fetch(
     `${baseURL}${forecastEndPoint}?key=${API_KEY}&q=tokyo&days=3`,
+    { mode: "cors" },
   );
 
   const json = await res.json();
@@ -16,6 +17,7 @@ async function apiQuery(city) {
   try {
     const res = await fetch(
       `${baseURL}${forecastEndPoint}?key=${API_KEY}&q=${city}&days=3`,
+      { mode: "cors" },
     );
 
     if (!res.ok) {
